@@ -3,15 +3,32 @@ import java.util.Scanner;
 public class Calender{
     public static void main(String [] args){
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter any year:");
+        System.out.println("Enter any year:"+"\033[97m");
         int year = sc.nextInt();
-        System.out.println("Enter 1st three letter of a month / type all to get yearly calender");
-        String month = sc.next();
+        sc.nextLine();
+        System.out.println("\033[0m"+"Enter 1st three letter of a month / press enter to get yearly calender"+"\033[97m");
+        String month = sc.nextLine();
         sc.close();
+        
         System.out.println();
+        System.out.println("\u001B[1;96m"+""+">>>>>>>  "+"\u001B[1;106m"+"[ YEAR  "+addZero(year)+year+" ]"+"\033[0m"+"\u001B[1;96m"+"  <<<<<<<\n"+"\u001B[0m");
         YearCalender(year,month);
+        printEnd();
     }
 
+    public static String addZero(int year){
+        String str="";
+        int count=0;
+        for(int i=year; i!=0; i/=10){
+            count++;
+        }
+        if(count==1){
+            return str+"0";
+        }
+        else{
+            return str;
+        }
+    }
     //Leap year check;
     public static boolean isLeap(int a){
         boolean flag;
@@ -184,35 +201,35 @@ public class Calender{
             int day1=1; 
             int date1=1;
             if(mon.equalsIgnoreCase("Jan")){
-                System.out.println("January "+y);
+                printMonth("January");
                 day1 = dayOfMon[0];
                 date1 = 1;
             }
             else if(mon.equalsIgnoreCase("Mar")){
-                System.out.println("March "+y);
+                printMonth("March");
                 day1 = dayOfMon[2];
                 date1 = 1;
             }
             else if(mon.equalsIgnoreCase("May")){
-                System.out.println("May "+y);
+                printMonth("May");
                 day1 = dayOfMon[4];
                 date1 = 1;
             }
             else if(mon.equalsIgnoreCase("Jul")){
-                System.out.println("July "+y);
+                printMonth("July");
                 day1 = dayOfMon[6];
                 date1 = 1;
             }
             else if(mon.equalsIgnoreCase("Aug")){
-                System.out.println("August "+y);
+                printMonth("August");
                 day1 = dayOfMon[7];
                 date1 = 1;
             }else if(mon.equalsIgnoreCase("Oct")){
-                System.out.println("October "+y);
+                printMonth("October");
                 day1 = dayOfMon[9];
                 date1 = 1;
             }else if(mon.equalsIgnoreCase("Dec")){
-                System.out.println("December "+y);
+                printMonth("December");
                 day1 = dayOfMon[11];
                 date1 = 1;
             }
@@ -264,12 +281,12 @@ public class Calender{
         
         //for February;
         else if(mon.equalsIgnoreCase("Feb")){
-            System.out.println("February "+y);
             int day2 = dayOfMon[1];
             int date2 = 1;
                 //If leap year feb==29;
                 if(isLeap(y)){
-                        for(int i=0; i<lenW; i++){
+                    printLeapMonth("February");
+                    for(int i=0; i<lenW; i++){
                         if(i<(lenW-1)){
                             System.out.print(week[i]+" ");
                         }
@@ -315,7 +332,8 @@ public class Calender{
                 }
                 // If not leap year feb==28;
                 else{
-                        for(int i=0; i<lenW; i++){
+                    printMonth("February");
+                    for(int i=0; i<lenW; i++){
                         if(i<(lenW-1)){
                             System.out.print(week[i]+" ");
                         }
@@ -365,22 +383,22 @@ public class Calender{
         else if(mon.equalsIgnoreCase("Apr") || mon.equalsIgnoreCase("Jun") || mon.equalsIgnoreCase("Sep") || mon.equalsIgnoreCase("Nov")){
            int day3=1; int date3=1;
             if(mon.equalsIgnoreCase("Apr")){
-                System.out.println("April "+y);
+                printMonth("April");
                 day3 = dayOfMon[3];
                 date3 = 1;
             }
             else if(mon.equalsIgnoreCase("Jun")){
-                System.out.println("June "+y);
+                printMonth("June");
                 day3 = dayOfMon[5];
                 date3 = 1;
             }
             else if(mon.equalsIgnoreCase("Sep")){
-                System.out.println("September "+y);
+                printMonth("September");
                 day3 = dayOfMon[8];
                 date3 = 1;
             }
             else if(mon.equalsIgnoreCase("Nov")){
-                System.out.println("November "+y);
+                printMonth("November");
                 day3 = dayOfMon[10];
                 date3 = 1;
             }
@@ -431,7 +449,7 @@ public class Calender{
         }
         
         //for all months/ Yearly calender;
-        else if(mon.equalsIgnoreCase("all")){
+        else if(mon.equalsIgnoreCase("")){
         //Calculate day of Jan 1;
         int day = Fday(y);
         
@@ -443,25 +461,25 @@ public class Calender{
             if(month==1 || month==3 || month==5 || month==7 || month==8 || month==10 || month==12){
                 //print mentioned month and year;
                 if(month==1){
-                    System.out.println("January "+y);
+                    printMonth("January");
                 }
                 else if(month==3){
-                    System.out.println("March "+y);
+                    printMonth("March");
                 }
                 else if(month==5){
-                    System.out.println("May "+y);
+                    printMonth("May");
                 }
                 else if(month==7){
-                    System.out.println("July "+y);
+                    printMonth("July");
                 }
                 else if(month==8){
-                    System.out.println("August "+y);
+                    printMonth("August");
                 }
                 else if(month==10){
-                    System.out.println("October "+y);
+                    printMonth("October");
                 }
                 else if(month==12){
-                    System.out.println("December "+y);
+                    printMonth("December");
                 }
                 //print days;
                 for(int i=0; i<lenW; i++){
@@ -513,16 +531,16 @@ public class Calender{
             else if(month==4 || month==6 || month==9 || month==11){
                 //print mentioned month and year;
                 if(month==4){
-                    System.out.println("April "+y);
+                    printMonth("April");
                 }
                 else if(month==6){
-                    System.out.println("June "+y);
+                    printMonth("June");
                 }
                 else if(month==9){
-                    System.out.println("September "+y);
+                    printMonth("September");
                 }
                 else if(month==11){
-                    System.out.println("November "+y);
+                    printMonth("November");
                 }
                 //print days;
                 for(int i=0; i<lenW; i++){
@@ -571,7 +589,7 @@ public class Calender{
             }
             
             else{
-                System.out.println("February "+y);
+                printLeapMonth("February");
                 //If leap year feb==29;
                 if(isLeap(y)){
                         for(int i=0; i<lenW; i++){
@@ -670,5 +688,17 @@ public class Calender{
             System.out.println();
         }
         }
+    }
+
+    public static void printMonth(String month){
+        System.out.println("\u001B[38;2;170;255;0m"+"[ "+month+" ]"+"\u001B[97m");
+    }
+
+    public static void printLeapMonth(String month){
+        System.out.println("\u001B[38;2;255;20;240m"+"[ "+month+" ]"+"\u001B[97m");
+    }
+
+    public static void printEnd(){
+        System.out.println("\u001B[1;96m"+"\n<<<<<<<   [ THE  END ]   >>>>>>>\n"+"\u001B[0m");
     }
 }
